@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>แบบทดสอบความเข้ากันของเรา</title>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Charmonman:wght@700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      color: #5a3e36;
+      padding: 20px;
+    }
+
+    .container {
+      background-color: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      width: 100%;
+    }
+
+    h1 {
+      color: #e84393;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 28px;
+      font-weight: 600;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .love-icon {
+      font-size: 40px;
+      text-align: center;
+      margin-bottom: 15px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .quiz-item {
+      margin-bottom: 25px;
+      padding-bottom: 15px;
+      border-bottom: 1px dashed #f8a5c2;
+    }
+
+    .quiz-question {
+      font-weight: 600;
+      color: #e84393;
+      margin-bottom: 10px;
+    }
+
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      padding: 8px 12px;
+      background-color: #fce4ec;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .option:hover {
+      background-color: #f8a5c2;
+      transform: translateX(5px);
+    }
+
+    .option.selected {
+      background-color: #e84393;
+      color: white;
+    }
+
+    .option-emoji {
+      margin-right: 10px;
+      font-size: 18px;
+    }
+
+    .instructions {
+      background-color: #fce4ec;
+      padding: 15px;
+      border-radius: 10px;
+      margin-top: 30px;
+      border-left: 4px solid #e84393;
+    }
+
+    .result-section {
+      display: none;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .result-title {
+      font-size: 24px;
+      color: #e84393;
+      margin-bottom: 15px;
+    }
+
+    .result-message {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+
+    .heart {
+      color: #e84393;
+    }
+    .next-btn {
+  display: block;
+  text-align: center;
+  margin: 30px auto 0;
+  background-color: #fff;
+  color: #e84393;
+  border: 2px solid #e84393;
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.next-btn:hover {
+  background-color: #e84393;
+  color: white;
+}
+
+
+    .submit-btn {
+      background-color: #e84393;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      display: block;
+      margin: 30px auto 0;
+      transition: all 0.3s;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .submit-btn:hover {
+      background-color: #c7357d;
+      transform: translateY(-3px);
+    }
+
+    .couple-name {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .name-input {
+      width: 48%;
+      padding: 10px;
+      border: 2px solid #f8a5c2;
+      border-radius: 8px;
+      font-family: 'Prompt', sans-serif;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 20px;
+      }
+      
+      .couple-name {
+        flex-direction: column;
+        gap: 10px;
+      }
+      
+      .name-input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="love-icon">💖</div>
+    <h1>แบบทดสอบความเข้ากันของเรา</h1>
+    
+    <div class="couple-name">
+      <input type="text" class="name-input" id="name1" placeholder="ชื่อคนแรก">
+      <input type="text" class="name-input" id="name2" placeholder="ชื่อคนที่สอง">
+    </div>
+    
+    <div class="quiz-item">
+      <div class="quiz-question">1. ชอบอาหารแบบไหนมากกว่า?</div>
+      <div class="quiz-options">
+        <div class="option" onclick="selectOption(this, 1)">
+          <span class="option-emoji">🔸</span> เผ็ด ๆ รสจัด
+        </div>
+        <div class="option" onclick="selectOption(this, 1)">
+          <span class="option-emoji">🔸</span> หวานมัน อร่อยแบบเด็ก ๆ
+        </div>
+        <div class="option" onclick="selectOption(this, 1)">
+          <span class="option-emoji">🔸</span> อะไรก็ได้ ถ้ามีคนป้อน
+        </div>
+      </div>
+    </div>
+    
+    <div class="quiz-item">
+      <div class="quiz-question">2. ชอบเที่ยวที่ไหน?</div>
+      <div class="quiz-options">
+        <div class="option" onclick="selectOption(this, 2)">
+          <span class="option-emoji">🔸</span> ทะเล
+        </div>
+        <div class="option" onclick="selectOption(this, 2)">
+          <span class="option-emoji">🔸</span> ภูเขา
+        </div>
+        <div class="option" onclick="selectOption(this, 2)">
+          <span class="option-emoji">🔸</span> ห้าง / คาเฟ่
+        </div>
+      </div>
+    </div>
+    
+    <div class="quiz-item">
+      <div class="quiz-question">3. วันว่างชอบทำอะไร?</div>
+      <div class="quiz-options">
+        <div class="option" onclick="selectOption(this, 3)">
+          <span class="option-emoji">🔸</span> นอนอยู่บ้าน
+        </div>
+        <div class="option" onclick="selectOption(this, 3)">
+          <span class="option-emoji">🔸</span> ไปเที่ยว
+        </div>
+        <div class="option" onclick="selectOption(this, 3)">
+          <span class="option-emoji">🔸</span> เล่นเกม / ดูซีรีส์
+        </div>
+      </div>
+    </div>
+    
+    <div class="quiz-item">
+      <div class="quiz-question">4. ถ้าเลือกได้ 1 อย่างตอนนี้ อยากกินอะไร?</div>
+      <div class="quiz-options">
+        <div class="option" onclick="selectOption(this, 4)">
+          <span class="option-emoji">🔸</span> หมูกระทะ
+        </div>
+        <div class="option" onclick="selectOption(this, 4)">
+          <span class="option-emoji">🔸</span> ชาบู
+        </div>
+        <div class="option" onclick="selectOption(this, 4)">
+          <span class="option-emoji">🔸</span> ชานมไข่มุก
+        </div>
+      </div>
+    </div>
+    
+    <div class="quiz-item">
+      <div class="quiz-question">5. เวลางอน อยากให้แฟนทำยังไง?</div>
+      <div class="quiz-options">
+        <div class="option" onclick="selectOption(this, 5)">
+          <span class="option-emoji">🔸</span> โทรมาง้อ
+        </div>
+        <div class="option" onclick="selectOption(this, 5)">
+          <span class="option-emoji">🔸</span> มาหาถึงที่
+        </div>
+        <div class="option" onclick="selectOption(this, 5)">
+          <span class="option-emoji">🔸</span> ส่งของกินมาเลย เดี๋ยวหายเอง
+        </div>
+      </div>
+    </div>
+    
+    <div class="quiz-item">
+      <div class="quiz-question">6. เพลงที่ชอบแนวไหน?</div>
+      <div class="quiz-options">
+        <div class="option" onclick="selectOption(this, 6)">
+          <span class="option-emoji">🔸</span> เศร้าเจ็บ ๆ
+        </div>
+        <div class="option" onclick="selectOption(this, 6)">
+          <span class="option-emoji">🔸</span> น่ารักสดใส
+        </div>
+        <div class="option" onclick="selectOption(this, 6)">
+          <span class="option-emoji">🔸</span> ลองทุกแนวที่แฟนเปิด
+        </div>
+      </div>
+    </div>
+    
+    <div class="quiz-item">
+      <div class="quiz-question">7. ถ้ามีเวลาอยู่ด้วยกัน 1 วัน อยากทำอะไร?</div>
+      <div class="quiz-options">
+        <div class="option" onclick="selectOption(this, 7)">
+          <span class="option-emoji">🔸</span> ไปเที่ยวถ่ายรูป
+        </div>
+        <div class="option" onclick="selectOption(this, 7)">
+          <span class="option-emoji">🔸</span> นอนกอดกันเฉย ๆ
+        </div>
+        <div class="option" onclick="selectOption(this, 7)">
+          <span class="option-emoji">🔸</span> ทำอะไรปั่น ๆ แบบที่ชอบ
+        </div>
+      </div>
+    </div>
+    
+    <div class="quiz-item">
+      <div class="quiz-question">8. เวลาทะเลาะกัน ใครควรขอโอก่อน?</div>
+      <div class="quiz-options">
+        <div class="option" onclick="selectOption(this, 8)">
+          <span class="option-emoji">🔸</span> ใครผิดคนนั้นง้อ
+        </div>
+        <div class="option" onclick="selectOption(this, 8)">
+          <span class="option-emoji">🔸</span> แฟนต้องง้อเสมอ
+        </div>
+        <div class="option" onclick="selectOption(this, 8)">
+          <span class="option-emoji">🔸</span> ไม่สำคัญ ใครก็ได้ หายงอนเถอะ
+        </div>
+      </div>
+    </div>
+    
+    <div class="quiz-item">
+      <div class="quiz-question">9. ถ้าได้ของขวัญจากแฟน อยากได้แบบไหน?</div>
+      <div class="quiz-options">
+        <div class="option" onclick="selectOption(this, 9)">
+          <span class="option-emoji">🔸</span> ของที่ใช้ได้จริง
+        </div>
+        <div class="option" onclick="selectOption(this, 9)">
+          <span class="option-emoji">🔸</span> ของตั้งโชว์/น่ารัก
+        </div>
+        <div class="option" onclick="selectOption(this, 9)">
+          <span class="option-emoji">🔸</span> ไม่ต้องมีของก็ได้ แค่ตั้งใจให้ก็พอ
+        </div>
+      </div>
+    </div>
+    
+    <div class="quiz-item">
+      <div class="quiz-question">10. คิดว่าเรากับแฟนเป็นคู่แบบไหน?</div>
+      <div class="quiz-options">
+        <div class="option" onclick="selectOption(this, 10)">
+          <span class="option-emoji">🔸</span> โรแมนติกเหมือนนิยาย
+        </div>
+        <div class="option" onclick="selectOption(this, 10)">
+          <span class="option-emoji">🔸</span> เพี้ยน ๆ เหมือนคู่การ์ตูน
+        </div>
+        <div class="option" onclick="selectOption(this, 10)">
+          <span class="option-emoji">🔸</span> ซึน ๆ แต่รักมาก
+        </div>
+      </div>
+    </div>
+    
+    <div class="instructions">
+      <strong>💘 วิธีเล่น:</strong><br>
+      1. ให้ทั้งสองคนตอบแยกกัน<br>
+      2. เอามาเทียบดูว่า "ตอบเหมือนกันกี่ข้อ"<br>
+      3. ผลลัพธ์:<br>
+      - ตรงกันเกิน 7 ข้อ = ใจตรงกันสุด ๆ<br>
+      - ตรงกัน 4–6 ข้อ = เข้ากันได้แบบพอดี<br>
+      - ตรงกันน้อยกว่า 4 = ต่างกันแต่รักกัน 💞
+    </div>
+    
+    <button class="submit-btn" onclick="calculateResult()">คำนวณผลลัพธ์</button>
+    
+    <div class="result-section" id="resultSection">
+      <div class="result-title">ผลลัพธ์ความเข้ากัน</div>
+      <div class="result-message" id="resultMessage"></div>
+      <div class="love-icon">💕</div>
+    </div>
+  </div>
+
+  <script>
+    const answers = {};
+    
+    function selectOption(optionElement, questionNumber) {
+      // ล้างการเลือกเดิมในคำถามนี้
+      const options = optionElement.parentElement.querySelectorAll('.option');
+      options.forEach(opt => opt.classList.remove('selected'));
+      
+      // เลือกตัวเลือกใหม่
+      optionElement.classList.add('selected');
+      
+      // บันทึกคำตอบ
+      const answerIndex = Array.from(options).indexOf(optionElement);
+      answers[questionNumber] = answerIndex;
+    }
+    
+    function calculateResult() {
+      const name1 = document.getElementById('name1').value || 'คนที่ 1';
+      const name2 = document.getElementById('name2').value || 'คนที่ 2';
+      
+      // นับจำนวนคำตอบที่เลือก
+      const answeredQuestions = Object.keys(answers).length;
+      if (answeredQuestions < 10) {
+        alert(`กรุณาตอบคำถามให้ครบทุกข้อ (ยังเหลือ ${10 - answeredQuestions} ข้อ)`);
+        return;
+      }
+      
+      // แสดงผลลัพธ์ (ในที่นี้เป็นตัวอย่าง ให้สุ่มผลลัพธ์)
+      const randomScore = Math.floor(Math.random() * 10) + 1; // 1-10
+      let message = '';
+      
+      if (randomScore >= 8) {
+        message = `✨ ${name1} กับ ${name2} ใจตรงกันสุด ๆ! (${randomScore}/10)<br>พวกคุณเข้าใจกันดีมาก เหมือนมีใจเดียวกันเลย~`;
+      } else if (randomScore >= 4) {
+        message = `💞 ${name1} กับ ${name2} เข้ากันได้แบบพอดี (${randomScore}/10)<br>ต่างกันบ้างแต่ก็เติมเต็มกันได้ดีมาก!`;
+      } else {
+        message = `🌷 ${name1} กับ ${name2} ต่างกันแต่รักกัน (${randomScore}/10)<br>ความต่างทำให้ชีวิตมีสีสันนะคะ!`;
+      }
+      
+      document.getElementById('resultMessage').innerHTML = message;
+      document.getElementById('resultSection').style.display = 'block';
+      
+      // เลื่อนไปดูผลลัพธ์
+      document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+  <a href="page3.html" class="next-btn">ถัดไป ➡️</a>
+
+</body>
+</html>

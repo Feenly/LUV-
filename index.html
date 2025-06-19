@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ปลดล็อกรหัสรัก</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>💘 ปลดล็อกรหัสลับ 💘</h1>
+    <p>ใส่วันที่เราคุยกันครั้งแรก (รูปแบบ: dd/mm/yyyy)</p>
+    
+    <input type="text" id="passwordInput" placeholder="dd/mm/yyyy">
+    <button onclick="checkPassword()">ยืนยัน</button>
+    
+    <p id="message"></p>
+    
+    <a href="page2.html" id="nextButton" class="hidden">ถัดไป ➤</a>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const input = document.getElementById("passwordInput").value.trim();
+      const message = document.getElementById("message");
+      const nextButton = document.getElementById("nextButton");
+
+      if (input === "19/06/2567") {
+        message.textContent = "ถูกต้องจ้า 💖 ไปกันเลย!";
+        message.style.color = "green";
+        nextButton.classList.remove("hidden");
+      } else {
+        message.textContent = "รหัสผิดน้า ลองใหม่อีกทีนะ";
+        message.style.color = "red";
+        nextButton.classList.add("hidden");
+      }
+    }
+  </script>
+</body>
+</html>

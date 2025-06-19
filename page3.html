@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>เปิดจดหมายรัก 💌</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Kanit', sans-serif;
+      background-color: #fff0f6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      text-align: center;
+      color: #e91e63;
+    }
+
+    .envelope {
+      width: 250px;
+      height: 150px;
+      background: #f06292;
+      position: relative;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      transition: transform 0.4s ease;
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 250px;
+      height: 75px;
+      background: #ec407a;
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      transform-origin: top center;
+      transition: transform 0.5s ease;
+      z-index: 2;
+    }
+
+    .message {
+      opacity: 0;
+      margin-top: 30px;
+      font-size: 18px;
+      max-width: 90%;
+      transition: opacity 0.5s ease;
+    }
+
+    .opened .flap {
+      transform: rotateX(180deg);
+    }
+
+    .opened .message {
+      opacity: 1;
+    }
+
+    #nextBtn {
+      display: none;
+      margin-top: 30px;
+      padding: 10px 25px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 18px;
+      cursor: pointer;
+    }
+    #nextBtn:hover {
+      background-color: #c2185b;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>คลิกเพื่อเปิดจดหมายรักของฟีน 💖</h1>
+
+  <div class="envelope" onclick="openEnvelope()" id="envelope">
+    <div class="flap"></div>
+  </div>
+
+  <div class="message" id="message">
+    ถึงเนของฟีน 🥺<br/>
+    รักชิบหายรักจนหอมปานจะกลืนกินขอบคุณรักที่สุดเลยขอโทษที่เราไม่ค่อยได้ปรับนิสัยอะไรให้มากมีแต่เธอปรับมาให้ฝ่ายเดียวมันก็รู้แย่จริง<br/>
+    ไม่ว่าวันไหน ฟีนก็จะอยู่ข้าง ๆ เสมอ 💘
+  </div>
+
+  <button id="nextBtn" onclick="goNext()">ถัดไป ➤</button>
+
+
+  <script>
+  const envelope = document.getElementById("envelope");
+  const message = document.getElementById("message");
+  const nextBtn = document.getElementById("nextBtn");
+
+  const popSound = new Audio("pop.mp3");
+
+  function openEnvelope() {
+    if (envelope.classList.contains("opened")) return;
+
+    envelope.classList.add("opened");
+    popSound.play();
+    spawnHearts();
+
+    setTimeout(() => {
+      message.style.opacity = "1";
+      nextBtn.style.display = "inline-block";
+    }, 700);
+  }
+
+  function goNext() {
+    window.location.href = "page4.html";
+  }
+
+  function spawnHearts() {
+    for (let i = 0; i < 5; i++) {
+      const heart = document.createElement("div");
+      heart.textContent = "💖";
+      heart.style.position = "fixed";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.top = "50%";
+      heart.style.fontSize = "24px";
+      heart.style.opacity = "1";
+      heart.style.animation = "floatUp 2s ease-out forwards";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 2000);
+    }
+  }
+</script>
+<style>
+  @keyframes floatUp {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100px); opacity: 0; }
+  }
+</style>
+
+  </script>
+</body>
+</html>
